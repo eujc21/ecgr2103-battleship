@@ -1,5 +1,12 @@
 #include <iostream>
 #include <string>
+
+#include <askUserForDifficulty.h>
+#include <checkIfLocationWasHit.h>
+#include <generateRandomLayout.h>
+#include <upateTopBoardWithHits.h>
+#include <wasOpposingPlayerHit.h>
+
 using namespace std;
 
 //int N=5;
