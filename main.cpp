@@ -1,11 +1,12 @@
 #include <iostream>
 #include <string>
 
-#include <askUserForDifficulty.h>
-#include <checkIfLocationWasHit.h>
-#include <generateRandomLayout.h>
-#include <upateTopBoardWithHits.h>
-#include <wasOpposingPlayerHit.h>
+#include "askUserForDifficulty.h"
+#include "checkIfLocationWasHit.h"
+#include "generateRandomLayout.h"
+//#include "upateTopBoardWithHits.h"
+#include "wasOpposingPlayerHit.h"
+#include "util/add.h"
 
 using namespace std;
 
@@ -30,6 +31,7 @@ int main(){
   //int boardSize[N][N];
   // NOTE testing values
   cout << "N:" << N << "difficulty: " << difficulty << endl;
+  cout << add(3,5) << endl;
   // end testing
   return 0;
 }
