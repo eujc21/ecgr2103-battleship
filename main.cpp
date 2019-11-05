@@ -1,12 +1,13 @@
 #include <iostream>
 #include <string>
 
-#include "askUserForDifficulty.h"
-#include "checkIfLocationWasHit.h"
-#include "generateRandomLayout.h"
-//#include "upateTopBoardWithHits.h"
-#include "wasOpposingPlayerHit.h"
+#include "decisions/askUserForDifficulty.h"
+#include "decisions/checkIfLocationWasHit.h"
+#include "decisions/determineBoardSize.h"
+#include "display/updateTopBoardWithHits.h"
+#include "decisions/wasOpposingPlayerHit.h"
 #include "util/add.h"
+#include "util/generateRandomLayout.h"
 
 using namespace std;
 
@@ -25,6 +26,7 @@ int main(){
   char difficulty;
 
   cout << "choose a difficulty" << endl;
+  cout << "Easy: e, Medium: m, Hard: h" << endl;
   cin >> difficulty;
   N = detBoardSize(difficulty);
   // TODO uncomment when ready to use
@@ -36,24 +38,3 @@ int main(){
   return 0;
 }
 
-// det is determine
-int detBoardSize(char difficulty){
-  switch(difficulty){
-    case 'e':
-        return 5;
-    break;
-    
-    case 'm':
-        return 6;
-    break;
-    
-    case 'h':
-        return 7;
-    break;
-    
-    default:
-        return 5;
-    break;
-  }
-  return 0;
-}
