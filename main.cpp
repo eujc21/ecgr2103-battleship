@@ -20,9 +20,9 @@ int main(){
 	while(true){
 		char difficulty;
 		char anyKey;
-		cout << "Press the Enter key to start: " << endl;
+		cout << "Press the 's' key to start: " << endl;
 		cin.get(anyKey);
-		if(anyKey == '\n'){
+		if(anyKey == 's'){
 			gamestatus = true;
 		}
 		while(gamestatus){
