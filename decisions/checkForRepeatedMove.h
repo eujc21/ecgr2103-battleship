@@ -14,10 +14,7 @@ int easyBoard[7][7] = {
   {1,1,1,0,1},
   {1,0,1,0,1}
   };
-// are these vars necessary?
-// TODO: coordinate transform for A-f to 0-5(possible switch case func)
-// input is an index location for an array
-// TODO 5 is only for an easy board. 5 could be 7 or 9 depending on difficulty
+
 bool checkRepeatedMove(int P2BottomBoard[][7], int rind, int cind){
 
   if (P2BottomBoard[rind][cind] == 1){
