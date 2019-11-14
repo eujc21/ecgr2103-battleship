@@ -4,9 +4,7 @@
 //hasLocationbeenhitBefore() is logic plan equiv
 using namespace std;
 
-//testing board.
-/* lets say P1 plays a move, this move needs to be checked on P2's board to make sure its not a repeat move. if we can can
-   implement this, then winning is a just a count of all hits*/
+
 int easyBoard[7][7] = {
   {0,0,0,0,0},
   {1,0,1,0,1},
