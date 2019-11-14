@@ -1,5 +1,13 @@
 // det is determine
-int detBoardSize(char difficulty){
+using namespace std;
+
+int detBoardSize(){
+	char difficulty;
+	cout << "choose a difficulty" << endl;
+	cout << "Easy: e, Medium: m, Hard: h" << endl;
+	cin >> difficulty;
+	cout << difficulty;
+
 	switch(difficulty){
 		case 'e':
 			return 5;
@@ -15,5 +23,7 @@ int detBoardSize(char difficulty){
 
 		default:
 			return 5;
-			break;  }
-	return 0;}
+			break;
+	}
+	return 0;
+}
