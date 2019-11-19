@@ -20,16 +20,16 @@ bool locationHit(
 	if (array1[x][y] == 1) {
 		hitStatus = true;
 		if(array2[x][y] == 1){
-		  cout << "Already hit that location!"
+		  cout << "Already hit that location!" << endl;
 		} else {
 		  array2[x][y] = 1;
-		  cout << "Target Hit!"
+		  cout << "Target Hit!" << endl;
 		}
 	}
 	else {
 		hitStatus = false;
 		array2[x][y] = 2;
-	  	cout << "Target Missed!"
+	  	cout << "Target Missed!" << endl;
 	}
 	
 	//this logic updates the ghost board and this setups up the top board to be drawn
