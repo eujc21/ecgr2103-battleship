@@ -20,6 +20,7 @@ bool winnerDecided(int array[][7], int size){
 
 		}
 	}
+	cout << count << endl;
 	response = (count == 9) ? true : false;
 	return response;
 }

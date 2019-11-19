@@ -10,6 +10,7 @@
 #include "decisions/chooseCoordinate.h"
 #include "decisions/winnerDecided.h"
 #include "display/updateTopBoardWithHits.h"
+#include "display/displayResults.h"
 #include "display/displayTopAndBottom.h"
 #include "util/generateBottomBoard.h"
 #include "util/populateTopBoard.h"
@@ -66,7 +67,7 @@ void gameLoopPlayer(
 			     );
 
 	}
-	if(!hitStatus){
+	if(!hitStatus && !winnerDecided(playerGB, size)){
 		player = (player == 0) ? 1 : 0;
 		clearScreen();
 		cout << "Target Missed!" << endl;
@@ -78,31 +79,30 @@ int main(){
 	// TODO uncomment when ready to use 
 	while(true){
 		char anyKey;
-		cout << "Press the 's' key to start: " << endl;
-		cin.get(anyKey);
-		clearScreen();
-		if(anyKey == 's'){
-			gamestatus = true;
-		}
-		// Determine the board size from user.
-		N = detBoardSize();
+			cout << "Press the 's' key to start: " << endl;
+			cin.get(anyKey);
+			clearScreen();
+			if(anyKey == 's'){
+				gamestatus = true;
+			}
+			// Determine the board size from user.
+			N = detBoardSize();
 
-		// Getting our ships ready.
-		generateBottomBoard(player1BB, N);	
-		this_thread::sleep_for(chrono::milliseconds(1000));
+			// Getting our ships ready.
+			generateBottomBoard(player1BB, N);	
+			this_thread::sleep_for(chrono::milliseconds(1000));
 
-		generateBottomBoard(player2BB, N);
+			generateBottomBoard(player2BB, N);
 
-		// Getting our top board and opponents bottom board are synced up.
-		populateTopBoard(player1TB, player2BB, N);				
-		populateTopBoard(player2TB, player1BB, N);				
-		while(gamestatus){
+			// Getting our top board and opponents bottom board are synced up.
+			populateTopBoard(player1TB, player2BB, N);				
+			populateTopBoard(player2TB, player1BB, N);				
+			while(gamestatus){
 
-			// Winner Decided should go inside condition
-			// Display Board
-			// Switch Players
-			cout << currentPlayer << endl;
-			if(currentPlayer == 0){
+				// Winner Decided should go inside condition
+				// Display Board
+				// Switch Players
+				if(currentPlayer == 0){
 				gameLoopPlayer(
 						player1BB,
 						player1GB,
@@ -110,7 +110,6 @@ int main(){
 						currentPlayer,
 						N
 					      );
-				cout << winnerDecided(player1GB, N) << endl;
 				if(winnerDecided(player1GB, N)){
 					gamestatus = false;
 					break;
@@ -123,18 +122,14 @@ int main(){
 						currentPlayer,
 						N
 					      );
-				cout << winnerDecided(player2GB, N) << endl;
 				if(winnerDecided(player2GB, N)){
 					gamestatus = false;
 					break;
 				}
 			}
-			// if(!winnerDecided()){
-			// } else {
-			// Display Results
-			// }
 		}
 
+		displayResults(currentPlayer);
 	} 
 	// end testing
 	return 0;
