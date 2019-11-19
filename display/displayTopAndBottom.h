@@ -23,8 +23,8 @@ void displayBoards(int tb[][7], int bb[][7], int row, int col, int PlayerNumber)
 }
 
 void clearScreen(){
-	for (int foo = 0; foo < 1000; foo++){
-		cout << endl;
-	}
-
+//	for (int foo = 0; foo < 1000; foo++){
+//		cout << endl;
+//	}
+	cout << "\033[2J\033[1;1H";
 }
