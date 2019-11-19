@@ -86,29 +86,37 @@ int main(){
 												populateTopBoard(player2TB, player1BB, N);				
 
 												// Winner Decided should go inside condition
-												if(!winnerDecided()){
-																// Display Board
-																// Switch Players
-																if(currentPlayer == 0){
-																				gameLoopPlayer(
-																												player1BB,
-																												player1GB,
-																												player2BB,
-																												currentPlayer,
-																												N
-																											);
-																} else {
-																				gameLoopPlayer(
-																												player2BB,
-																												player2GB,
-																												player1BB,
-																												currentPlayer,
-																												N
-																											);
+												// Display Board
+												// Switch Players
+												if(currentPlayer == 0){
+																gameLoopPlayer(
+																								player1BB,
+																								player1GB,
+																								player2BB,
+																								currentPlayer,
+																								N
+																							);
+																if(winnerDecided(player1GB, N)){
+																				gamestatus = false;
+																				break;
 																}
 												} else {
-																// Display Results
+																gameLoopPlayer(
+																								player2BB,
+																								player2GB,
+																								player1BB,
+																								currentPlayer,
+																								N
+																							);
+																if(winnerDecided(player2GB, N)){
+																				gamestatus = false;
+																				break;
+																}
 												}
+												// if(!winnerDecided()){
+												// } else {
+																// Display Results
+												// }
 								}
 
 				} 
