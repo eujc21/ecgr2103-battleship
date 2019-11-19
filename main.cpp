@@ -1,8 +1,6 @@
 #include <iostream>
 #include <string>
-#include <thread>
-#include <chrono>
-
+#include <unistd.h>
 #include "decisions/askUserForDifficulty.h"
 #include "decisions/checkIfLocationWasHit.h"
 #include "decisions/determineBoardSize.h"
@@ -90,7 +88,7 @@ int main(){
 
 			// Getting our ships ready.
 			generateBottomBoard(player1BB, N);	
-			this_thread::sleep_for(chrono::milliseconds(1000));
+			usleep(1E6);
 
 			generateBottomBoard(player2BB, N);
 
