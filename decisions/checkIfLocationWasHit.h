@@ -29,7 +29,6 @@ bool locationHit(
 	else {
 		hitStatus = false;
 		array2[x][y] = 2;
-	  	cout << "Target Missed!" << endl;
 	}
 	
 	//this logic updates the ghost board and this setups up the top board to be drawn

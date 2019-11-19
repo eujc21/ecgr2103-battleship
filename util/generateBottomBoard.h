@@ -6,6 +6,7 @@
 
 using namespace std;
 void generateBottomBoard(int bottomBoard[][7], int size){
+	srand(time(0));
 	int MyBoard1A[3][5][5] = {
 		{
 			{ 1, 0, 0, 1},

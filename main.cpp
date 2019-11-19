@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <thread>
+#include <chrono>
 
 #include "decisions/askUserForDifficulty.h"
 #include "decisions/checkIfLocationWasHit.h"
@@ -34,8 +36,8 @@ void gameLoopPlayer(
 		){
 	int xCoord, yCoord;
 	bool hitStatus = true;
-	// displayBoard
 
+	// displayBoard
 	displayBoards(
 			playerGB,
 			playerBB,
@@ -54,7 +56,6 @@ void gameLoopPlayer(
 				yCoord,
 				size
 				);
-		clearScreen();
 		// displayBoards
 		displayBoards(
 				playerGB,
@@ -68,6 +69,7 @@ void gameLoopPlayer(
 	if(!hitStatus){
 		player = (player == 0) ? 1 : 0;
 		clearScreen();
+		cout << "Target Missed!" << endl;
 	}
 
 }
@@ -78,6 +80,7 @@ int main(){
 		char anyKey;
 		cout << "Press the 's' key to start: " << endl;
 		cin.get(anyKey);
+		clearScreen();
 		if(anyKey == 's'){
 			gamestatus = true;
 		}
@@ -86,6 +89,8 @@ int main(){
 
 		// Getting our ships ready.
 		generateBottomBoard(player1BB, N);	
+		this_thread::sleep_for(chrono::milliseconds(1000));
+
 		generateBottomBoard(player2BB, N);
 
 		// Getting our top board and opponents bottom board are synced up.
