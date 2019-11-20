@@ -78,8 +78,7 @@ void gameLoopPlayer(
 int main(){
 	while(true){
 		char anyKey;
-    // mainMenu()
-			cout << "Press the 's' key to start: " << endl;
+//			cout << "Press the 's' key to start: " << endl;
 			cin.get(anyKey);
 			clearScreen();
 			if(anyKey == 's'){

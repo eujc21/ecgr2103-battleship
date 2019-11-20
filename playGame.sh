@@ -1,0 +1,2 @@
+cat mainMenu.txt
+./final
