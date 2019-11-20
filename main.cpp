@@ -1,59 +1,138 @@
+
 #include <iostream>
 #include <string>
-
-#include "askUserForDifficulty.h"
-#include "checkIfLocationWasHit.h"
-#include "generateRandomLayout.h"
-//#include "upateTopBoardWithHits.h"
-#include "wasOpposingPlayerHit.h"
-#include "util/add.h"
+#include <unistd.h>
+#include "decisions/askUserForDifficulty.h"
+#include "decisions/checkIfLocationWasHit.h"
+#include "decisions/determineBoardSize.h"
+#include "decisions/wasOpposingPlayerHit.h"
+#include "decisions/chooseCoordinate.h"
+#include "decisions/winnerDecided.h"
+#include "display/updateTopBoardWithHits.h"
+#include "display/displayResults.h"
+#include "display/displayTopAndBottom.h"
+#include "util/generateBottomBoard.h"
+#include "util/populateTopBoard.h"
 
 using namespace std;
 
-//int N=5;
-
-
-//char difficulty = 'e';
 int detBoardSize(char difficulty);
-int N;
+int N; //board size
+int player1TB[7][7];
+int player2TB[7][7];
+int player1BB[7][7];
+int player2BB[7][7];
+int player1GB[7][7];
+int player2GB[7][7];
+bool gamestatus = false;
+int currentPlayer = 0;
 
+void gameLoopPlayer(
+		int playerBB[][7],
+		int playerGB[][7],
+		int oppPB[][7],
+		int &player,
+		int size
+		){
+	int xCoord, yCoord;
+	bool hitStatus = true;
+
+	// displayBoard
+	displayBoards(
+			playerGB,
+			playerBB,
+			size,
+			size,
+			player
+		     );
+	while(hitStatus){
+		// Choose Coordinates
+		yCoord = chooseY(size);
+		xCoord = chooseX(size);
+		hitStatus = locationHit(
+				oppPB,
+				playerGB,
+				xCoord,
+				yCoord,
+				size
+				);
+		// displayBoards
+		displayBoards(
+				playerGB,
+				playerBB,
+				size,
+				size,
+				player
+			     );
+
+	}
+	if(!hitStatus && !winnerDecided(playerGB, size)){
+		player = (player == 0) ? 1 : 0;
+		cout << "Target Missed!" << endl;
+		usleep(2E6);
+		clearScreen();
+	}
+
+}
 
 int main(){
-  // TODO uncomment when ready to use 
-    //int player1;
-    //int player2;
-  char difficulty;
+	while(true){
+		char anyKey;
+//			cout << "Press the 's' key to start: " << endl;
+			cin.get(anyKey);
+//			clearScreen();
+			if(anyKey == 's'){
+				gamestatus = true;
+			}
+			// Determine the board size from user.
+			N = detBoardSize();
 
-  cout << "choose a difficulty" << endl;
-  cin >> difficulty;
-  N = detBoardSize(difficulty);
-  // TODO uncomment when ready to use
-  //int boardSize[N][N];
-  // NOTE testing values
-  cout << "N:" << N << "difficulty: " << difficulty << endl;
-  cout << add(3,5) << endl;
-  // end testing
-  return 0;
+			// Getting our ships ready.
+			generateBottomBoard(player1BB, N);	
+			usleep(1E6);
+
+			generateBottomBoard(player2BB, N);
+
+			// Getting our top board and opponents bottom board are synced up.
+			populateTopBoard(player1TB, player2BB, N);
+			populateTopBoard(player2TB, player1BB, N);
+			while(gamestatus){
+
+				// Winner Decided should go inside condition
+				// Display Board
+				// Switch Players
+				if(currentPlayer == 0){
+				gameLoopPlayer(
+						player1BB,
+						player1GB,
+						player2BB,
+						currentPlayer,
+						N
+					      );
+				if(winnerDecided(player1GB, N)){
+					clearScreen();
+					displayResults(currentPlayer);
+					gamestatus = false;
+					break;
+				}
+			} else {
+				gameLoopPlayer(
+						player2BB,
+						player2GB,
+						player1BB,
+						currentPlayer,
+						N
+					      );
+				if(winnerDecided(player2GB, N)){
+					displayResults(currentPlayer);
+					gamestatus = false;
+					break;
+				}
+			}
+		}
+      // playsound()
+// 		displayResults(currentPlayer); 
+	}
+	return 0;
 }
 
-// det is determine
-int detBoardSize(char difficulty){
-  switch(difficulty){
-    case 'e':
-        return 5;
-    break;
-    
-    case 'm':
-        return 6;
-    break;
-    
-    case 'h':
-        return 7;
-    break;
-    
-    default:
-        return 5;
-    break;
-  }
-  return 0;
-}

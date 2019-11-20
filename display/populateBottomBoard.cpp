@@ -5,23 +5,19 @@
  
 using namespace std;
 
-void populateBoard(int board[][7], int row, int col){
-	// TODO determine based off difficulty
-	if (row ==5){
-	cout << "  A B C D E" << endl;
-	}
-	if (row == 6){
-	cout << "  A B C D E F" << endl;
-	}
-	if (row == 7){
-	cout << "  A B C D E F G" << endl;
-	}
-	
-  for (int i =0; i < row; i++){
-		// TODO implement based off diff
-		// for loop is for determining row number display
-		cout << (i+1) << " ";
+int easyBoard[7][7] = {
+  {0,3,2,0,0},
+  {1,3,1,0,1},
+  {1,3,1,0,1},
+  {1,1,1,0,1},
+  {1,0,1,0,1}
+  };
+
+char populateBoard(int board[][7], int row, int col){
+	cout << "Hello" << endl;
+	for (int i =0; i < row; i++){
 		for(int j=0; j < col; j++){
+			// TODO what should go here? what should the value of board[i][j] be?
 			if (board[i][j] == 0) {
 				// empty
 				cout << "*";
@@ -45,3 +41,7 @@ void populateBoard(int board[][7], int row, int col){
 	}
 }
 
+int main() {
+	populateBoard(easyBoard, 7, 7);
+	return 0;
+}
