@@ -80,7 +80,7 @@ int main(){
 		char anyKey;
 //			cout << "Press the 's' key to start: " << endl;
 			cin.get(anyKey);
-			clearScreen();
+//			clearScreen();
 			if(anyKey == 's'){
 				gamestatus = true;
 			}
@@ -110,6 +110,8 @@ int main(){
 						N
 					      );
 				if(winnerDecided(player1GB, N)){
+					clearScreen();
+					displayResults(currentPlayer);
 					gamestatus = false;
 					break;
 				}
@@ -122,13 +124,14 @@ int main(){
 						N
 					      );
 				if(winnerDecided(player2GB, N)){
+					displayResults(currentPlayer);
 					gamestatus = false;
 					break;
 				}
 			}
 		}
       // playsound()
-		displayResults(currentPlayer);
+// 		displayResults(currentPlayer); 
 	}
 	return 0;
 }
