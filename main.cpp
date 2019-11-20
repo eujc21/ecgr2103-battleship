@@ -110,7 +110,6 @@ int main(){
 						N
 					      );
 				if(winnerDecided(player1GB, N)){
-					clearScreen();
 					displayResults(currentPlayer);
 					gamestatus = false;
 					break;
