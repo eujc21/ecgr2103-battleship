@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <string>
 #include <unistd.h>
@@ -46,8 +47,8 @@ void gameLoopPlayer(
 		     );
 	while(hitStatus){
 		// Choose Coordinates
-		xCoord = chooseX(size);
 		yCoord = chooseY(size);
+		xCoord = chooseX(size);
 		hitStatus = locationHit(
 				oppPB,
 				playerGB,
@@ -67,16 +68,17 @@ void gameLoopPlayer(
 	}
 	if(!hitStatus && !winnerDecided(playerGB, size)){
 		player = (player == 0) ? 1 : 0;
-		clearScreen();
 		cout << "Target Missed!" << endl;
+		usleep(2E6);
+		clearScreen();
 	}
 
 }
 
 int main(){
-	// TODO uncomment when ready to use 
 	while(true){
 		char anyKey;
+    // mainMenu()
 			cout << "Press the 's' key to start: " << endl;
 			cin.get(anyKey);
 			clearScreen();
@@ -93,8 +95,8 @@ int main(){
 			generateBottomBoard(player2BB, N);
 
 			// Getting our top board and opponents bottom board are synced up.
-			populateTopBoard(player1TB, player2BB, N);				
-			populateTopBoard(player2TB, player1BB, N);				
+			populateTopBoard(player1TB, player2BB, N);
+			populateTopBoard(player2TB, player1BB, N);
 			while(gamestatus){
 
 				// Winner Decided should go inside condition
@@ -126,10 +128,9 @@ int main(){
 				}
 			}
 		}
-
+      // playsound()
 		displayResults(currentPlayer);
-	} 
-	// end testing
+	}
 	return 0;
 }
 
